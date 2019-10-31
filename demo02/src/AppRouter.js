@@ -6,21 +6,49 @@ import News from './Pages/News'
 import './index.css'
 
 function AppRouter() {
+  let routeConfig = [
+    {
+      path: '/',
+      title: '首页',
+      exact: true,
+      component: Index
+    },
+    {
+      path: '/video',
+      title: '视频',
+      exact: false,
+      component: Video
+    },
+    {
+      path: '/news',
+      title: '资讯',
+      exact: false,
+      component: News
+    }
+  ]
   return (
     <Router>
       <div className="mainDiv">
         <div className="leftNav">
           <h3>一级导航</h3>
           <ul>
-            <li><Link to="/">首页</Link></li>
-            <li><Link to="/video">视频</Link></li>
-            <li><Link to="/news">资讯</Link></li>
+            {
+              routeConfig.map((item, index) => {
+                return (
+                  <li key={index+item}><Link to={item.path}>{item.title}</Link></li>
+                )
+              })
+            }
           </ul>
         </div>
         <div className="rightMain">
-          <Route path="/" exact component={Index} />
-          <Route path="/video" component={Video} />
-          <Route path="/news" component={News} />
+          {
+            routeConfig.map((item, index) => {
+              return (
+                <Route key={index+item} path={item.path} exact={item.exact} component={item.component}></Route>
+              )
+            })
+          }
         </div>
       </div>
     </Router>
