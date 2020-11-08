@@ -6,6 +6,7 @@ import News from './Pages/News'
 import './index.css'
 
 function AppRouter() {
+  // 数据从后端获取
   let routeConfig = [
     {
       path: '/',
